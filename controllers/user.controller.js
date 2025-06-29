@@ -1,10 +1,8 @@
 const User = require("../models/user.model");
 const bcrypt = require('bcrypt');
-const { connectDB, disconnectDB } = require("../config/db");
 
 exports.register = async (req, res) => {
     try {
-        await connectDB();
         const { firstName, lastName, email, specialty, password } = req.body;
 
         console.log(req.body);
@@ -34,14 +32,11 @@ exports.register = async (req, res) => {
         console.error('Error registering user:', error);
         req.flash('error', 'Error registering user');
         res.render('user/error', { message: 'An unexpected error occurred. Please try again later.' });
-    } finally {
-        await disconnectDB();
     }
 };
 
 exports.login = async (req, res) => {
     try {
-        await connectDB();
 
         const { email, password } = req.body;
 
@@ -70,9 +65,7 @@ exports.login = async (req, res) => {
         console.error('Error logging in:', error);
         req.flash('error', 'An error occurred. Please try again.');
         res.render('user/error', { message: 'An unexpected error occurred. Please try again later.' });
-    } finally {
-        await disconnectDB();
-    }
+    } 
 };
 
 exports.logout = (req, res) => {

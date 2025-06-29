@@ -1,9 +1,7 @@
 const Subject = require("../models/subject.model");
-const { connectDB, disconnectDB } = require("../config/db");
 
 exports.addSubject = async (req, res) => {
     try {
-        await connectDB();
 
         const { majorId, yearId, submajorId } = req.params;
         const { name, types, semester } = req.body;
@@ -24,14 +22,11 @@ exports.addSubject = async (req, res) => {
         console.error('Error adding subject:', error);
         req.flash('error', 'Error adding subject. Please try again later.');
         res.redirect(`/dashboard/major/${majorId}/year/${yearId}/subjects`);
-    } finally {
-        await disconnectDB();
-    }
+    } 
 };
 
 exports.updateSubject = async (req, res) => {
     try {
-        await connectDB();
 
         const { majorId, yearId, submajorId } = req.params;
         const { name, types, semester } = req.body;
@@ -55,14 +50,11 @@ exports.updateSubject = async (req, res) => {
         console.error('Error updating subject:', error);
         req.flash('error', 'Error updating subject. Please try again later.');
         res.redirect(`/dashboard/major/${majorId}/year/${yearId}/subject/edit/${req.params.subjectId}`);
-    } finally {
-        await disconnectDB();
-    }
+    } 
 };
 
 exports.deleteSubject = async (req, res) => {
     try {
-        await connectDB();
 
         const { subjectId, majorId, yearId } = req.params;
 
@@ -76,7 +68,5 @@ exports.deleteSubject = async (req, res) => {
     } catch (error) {
         console.error('Error deleting subject:', error);
         res.render('user/error', { message: 'An unexpected error occurred. Please try again later.' });
-    } finally {
-        await disconnectDB();
     }
 };

@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 const homeRoute = require('./routes/home.route');
 const adminRoute = require('./routes/admin.route');
+const { connectDB } = require('./config/db');
 
 // Set view engine
 app.set('view engine', 'ejs');
@@ -21,6 +22,8 @@ app.use(session({
         maxAge: 365 * 24 * 60 * 60 * 1000 
     }
 }));
+
+connectDB();
 
 // Use routes
 app.use('/', homeRoute);

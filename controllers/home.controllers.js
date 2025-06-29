@@ -4,37 +4,29 @@ const Submajor = require('../models/submajor.model');
 const Subject = require('../models/subject.model');
 const Type = require('../models/type.model');
 const Document = require('../models/document.model');
-const { connectDB, disconnectDB } = require('../config/db');
 
 exports.getResources = async (req, res) => {
     try {
-        await connectDB();
         const majors = await Major.find({});
         res.render('user/resources', { majors, page: 'resources', session: req.session });
     } catch (error) {
         console.error('Error fetching resources:', error);
         res.render('user/error', { message: 'Error fetching resources. Please try again later.', session: req.session });
-    } finally {
-        await disconnectDB();
     }
 };
 
 exports.getHome = async (req, res) => {
     try {
-        await connectDB();
         const majors = await Major.find({});
         res.render('user/index', { majors, page: 'home', session: req.session });
     } catch (error) {
         console.error('Error fetching home page:', error);
         res.render('user/error', { message: 'Error fetching home page. Please try again later.', session: req.session });
-    } finally {
-        await disconnectDB();
-    }
+    } 
 };
 
 exports.getMajor = async (req, res) => {
     try {
-        await connectDB();
         const majorId = req.params.id;
         const major = await Major.findById(majorId);
         if (!major) {
@@ -72,8 +64,6 @@ exports.getMajor = async (req, res) => {
     } catch (error) {
         console.error('Error fetching Major', error);
         res.render('user/error', { message: 'Error fetching Major. Please try again later.', session: req.session });
-    } finally {
-        await disconnectDB();
     }
 };
 
@@ -89,7 +79,6 @@ exports.getLogin = (req, res) => {
 
 exports.getRegister = async (req, res) => {
     try {
-        await connectDB();
 
         const success = req.flash('success');
         const error = req.flash('error');
@@ -105,16 +94,12 @@ exports.getRegister = async (req, res) => {
     } catch (err) {
         console.error('Error fetching registration page:', err);
         res.render('user/error', { message: 'Error fetching registration page. Please try again later.' });
-    } finally {
-        await disconnectDB();
     }
 };
 
 exports.getDocuments = async (req, res) => {
     try {
         const { type, subjectId, majorId } = req.params;
-
-        await connectDB();
 
         const typeDocument = await Type.findOne({ name: type });
         if (!typeDocument) {
@@ -132,8 +117,6 @@ exports.getDocuments = async (req, res) => {
     } catch (err) {
         console.error('Error fetching documents:', err);
         res.render('user/error', { message: 'Error fetching documents. Please try again later.', session: req.session });
-    } finally {
-        await disconnectDB();
     }
 };
 
