@@ -1,0 +1,36 @@
+<%- include('../parts/head') %>
+
+    <body>
+        <section class="white-section">
+            <div class="container-fluid">
+                <h2 id="year1" class="year-title">
+                    <%= subject.name %>
+                </h2>
+                <hr>
+                <% if (documents.length> 0) { %>
+                    <div class="files-col">
+                        <ul class=" list-group list-group-flush">
+                            <% documents.forEach((document, index)=> { %>
+                                <li class="list-group-item">
+                                    <a target="_blank" href="<%= document.path %>">
+                                        <button class=" btn w-100 files-btn" type="button">
+                                            <span class="files-icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                            <%= document.name %>
+                                        </button>
+                                    </a>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <% } else { %>
+                            <div class="alert alert-warning" role="alert">
+                                No documents found for this subject.
+                            </div>
+                            <% } %>
+                    </div>
+                    <br><br>
+                    <a href="/major/<%= majorId %>" class="btn btn-secondary sign-btn">Back to Subjects</a>
+            </div>
+        </section>
+    </body>
+
+    </html>

@@ -1,0 +1,111 @@
+<%- include('../parts/head') %>
+    <!-- home section -->
+    <section class="colored-section" id="home">
+        <!-- navbar -->
+        <%- include('../parts/nav') %>
+            <!-- home -->
+            <div class="container-fluid">
+                <h1 class="home-heading mt-4 mt-md-0">Unleashing Your Learning Potential</h1>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <p>
+                            Welcome to Your-Lib, a resource pool for all.
+                            Explore a wide range of academic materials, including courses, Lecture materials, and
+                            worksheets, for students
+                            specializing in Computer Science, Mathematics, Physics, and Chemistry. Empower your studies
+                            with curated resources tailored to your educational needs.
+                        </p>
+                        <a href="/resources" class="cta-button btn btn-outline-light mt-4">Explore Resources</a>
+                    </div>
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <img src="images/home-img.jpg" alt="home-img" class="home-img img-fluid">
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section id="resources" class="white-section">
+        <div class="container-fluid">
+            <div class="row">
+                <% majors.forEach(major=> { %>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="specialty-card">
+                            <a href="/major/<%= major._id %>">
+                                <img src="<%= major.image %>" alt="<%= major.name %>" class="specialty-image img-fluid">
+                                <!-- Added img-fluid class -->
+                            </a>
+                            <a class="btn btn-primary specialty-button">
+                                <%= major.name %>
+                            </a>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="colored-section">
+        <div id="testimonials-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="6000">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <h2 class="testimonial-text">"Accessing Physics notes and solved problems on Your-Lib has helped me
+                        stay ahead in class."</h2>
+                    <em>Neha, Physics, 1st Year</em>
+
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <h2 class="testimonial-text">"Your-Lib has made my study routine so much easier. All the notes and
+                        materials I need are just one click away!"</h2>
+                    <em>ABC, Chemistry, 1st Year</em>
+
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <h2 class="testimonial-text">"Thanks to Your-Lib, I feel more confident and organized in my studies.
+                        It’s become my go-to academic partner."</h2>
+                    <em>ABC, Chemistry, 1st Year</em>
+
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonials-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonials-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Club Section -->
+    <section id="club" class="white-section">
+        <div class="container-fluid">
+            <h2 class="about-title text-center">About YourLib</h2>
+            <div class="row">
+                <div class="col-lg-6 d-flex justify-content-center mb-4 mb-lg-0">
+                    <img src="/images/book.png" alt="book" class="about-img img-fluid">
+                </div>
+
+                <div class="col-lg-6 about-content">
+                    <p class="about-text">
+                        <span class="about-subtitle">YourLib</span>, launched on April 29, 2013, unites students across
+                        scientific disciplines. The club’s core mission is to spark curiosity and enhance skills through
+                        interactive, hands-on learning. YourLib cultivates a collaborative space that inspires critical
+                        thinking and creativity. With dynamic workshops and events, it encourages exploration beyond
+                        textbooks and fosters a spirit of teamwork.
+
+                    </p>
+                    <a href="/contact" class="btn btn-outline-primary about-btn">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('../parts/footer') %>
